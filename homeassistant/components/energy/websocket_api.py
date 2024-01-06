@@ -124,6 +124,7 @@ def ws_get_prefs(
         vol.Required("type"): "energy/save_prefs",
         vol.Optional("energy_sources"): ENERGY_SOURCE_SCHEMA,
         vol.Optional("device_consumption"): [DEVICE_CONSUMPTION_SCHEMA],
+        vol.Optional("show_other", default=False): bool,
     }
 )
 @_ws_with_manager
@@ -133,7 +134,7 @@ async def ws_save_prefs(
     msg: dict,
     manager: EnergyManager,
 ) -> None:
-    """Handle get prefs command."""
+    """Handle save prefs command."""
     msg_id = msg.pop("id")
     msg.pop("type")
     await manager.async_update(cast(EnergyPreferencesUpdate, msg))

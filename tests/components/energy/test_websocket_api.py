@@ -148,6 +148,7 @@ async def test_save_preferences(
             },
         ],
         "device_consumption": [{"stat_consumption": "some_device_usage"}],
+        "show_other": True,
     }
 
     await client.send_json({"id": 6, "type": "energy/save_prefs", **new_prefs})

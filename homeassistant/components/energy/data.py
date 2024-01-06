@@ -141,6 +141,7 @@ class EnergyPreferences(TypedDict):
 
     energy_sources: list[SourceType]
     device_consumption: list[DeviceConsumption]
+    show_other: bool
 
 
 class EnergyPreferencesUpdate(EnergyPreferences, total=False):
@@ -312,6 +313,7 @@ class EnergyManager:
         return {
             "energy_sources": [],
             "device_consumption": [],
+            "show_other": False,
         }
 
     async def async_update(self, update: EnergyPreferencesUpdate) -> None:
@@ -324,6 +326,7 @@ class EnergyManager:
         for key in (
             "energy_sources",
             "device_consumption",
+            "show_other",
         ):
             if key in update:
                 data[key] = update[key]  # type: ignore[literal-required]
